@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New User{% endblock %}
+
+{% block author %}{% endblock %}
+
+{% block css %}
+<style>
+.base-form label{
+display: block;
+margin-top: 25px;
+}
+.base-form button{
+margin-top: 25px;
+}
+.base-form input{
+width: 100%;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <!--<a href="#" class="btn btn-success pull-right">Create New Post</a>-->
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                       Registration Form
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method="POST" enctype="multipart/form-data" class="base-form">
+                            {% csrf_token %}
+                            <div class="col-md-12">
+                                <label>Username</label>
+                                <input type="text" name="user" placeholder="User Name">
+                            </div>
+                            <div class="col-md-12">
+                                <label>Password</label>
+                                <input type="password" name="pass" placeholder="Password">
+                            </div>
+
+                            <div class="col-md-12">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}{% endblock %}

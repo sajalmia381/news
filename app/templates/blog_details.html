@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog Details{% endblock %}
+{% block css %}{% endblock %}
+
+{% block author %}
+    <div class="fh5co-bio">
+        <figure>
+            <img src="{{ post.article_author.image.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+        </figure>
+        <h3 class="heading">About Me</h3>
+        <h2>{{ post.article_author.get_full_name }}</h2>
+        <h4>{{ post.article_author.current_user.email }}</h4>
+        <p>{{ post.article_author.details }}</p>
+        <ul class="fh5co-social">
+            <li><a href="#"><i class="icon-twitter"></i></a></li>
+            <li><a href="#"><i class="icon-facebook"></i></a></li>
+            <li><a href="#"><i class="icon-instagram"></i></a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row fh5co-post-entry single-entry">
+
+        </div>
+    </div>
+    <section>
+        <div class="container-fluid">
+            <div class="row fh5co-post-entry single-entry">
+            {% if post.id > first.id %}
+            <a href="{% url 'blog:blog_details' id=post.id|add:'-1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
+            {% endif %}
+            {% if post.id < last.id %}
+            <a href="{% url 'blog:blog_details' id=post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
+            {% endif %}
+                <article class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+                    <figure class="animate-box">
+                        <img src="{{ post.image.url }}" alt="Image" class="img-responsive">
+                    </figure>
+                    <div class="fh5co-meta animate-box"><a href="#">{{ post.category }}</a> <a href="" class="article_author">{{ post.article_author.current_user.username }}</a></div>
+                    <h2 class="fh5co-article-title animate-box">{{ post.title }}</h2>
+                    <span class="fh5co-meta fh5co-date animate-box">{{ post.posted_on }}</span>
+
+                    <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-left content-article">
+
+                        <div class="row rp-b">
+                            <div class="col-md-12 animate-box">
+                                <blockquote>
+                                    <p>{{ post.paragraph }}</p>
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <div class="row rp-b">
+                            <div class="col-lg-6 col-md-12 animate-box">
+                                <figure>
+                                    <img src="{{ post.image_2.url }}" alt="Images" class="img-responsive">
+                                </figure>
+                            </div>
+                            <div class="col-lg-6 col-md-12 cp-l animate-box">
+                                <p>{{ post.paragraph_2 }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 animate-box">
+                                <p>{{ post.paragraph }}</p>
+                                <p>{{ post.paragraph_2 }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>Comment Your Think</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="" method="POST" enctype="multipart/form-data" class="base-form">
+                                {% csrf_token %}
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                    {{ form.email }}
+                                </div>
+                                <div class="col-md-12">
+                                    <label>comments</label>
+                                    {{ form.comment }}
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-primary">Post</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>Comments</h3>
+                        </div>
+                        {% for c in comment %}
+                        <div class="panel-body">
+                            <div class="col-md-2">
+                                {{ c.name }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ c.email }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ c.comment }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for r in related %}
+                    <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box related-blog">
+                        <figure>
+                            <a href="{{ r.blog_details_url }}"><img src="{{ r.image.url }}" alt="Image" class="img-responsive"></a>
+                        </figure>
+                        <div class="fh5co-meta"><a href="{% url 'blog:single_category' name=r.category %}">{{ r.category }}</a> <a href="{{ r.author_post_url }}" class="article_author">{{ r.article_author.current_user.username }}</a></div>
+                        <h2 class="fh5co-article-title"><a href="{{ r.blog_details_url }}">{{ r.title }}</a></h2>
+                        <span class="fh5co-meta fh5co-date">{{ r.posted_on }}</span>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}{% endblock %}

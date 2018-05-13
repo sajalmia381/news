@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New Category{% endblock %}
+
+{% block author %}{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <!--<a href="#" class="btn btn-success pull-right">Create New Post</a>-->
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                       Category Form
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method="POST" enctype="multipart/form-data" class="base-form">
+                            {% csrf_token %}
+                            <div class="col-md-6">
+                                {{ form.as_p }}
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-success">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}{% endblock %}

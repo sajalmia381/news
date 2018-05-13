@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}News - Public blog news{% endblock %}
+<!-- css -->
+{% block css %}{% endblock %}
+<!-- body Content -->
+{% block content %}
+	<section>
+		<div class="container-fluid">
+			<div class="row fh5co-post-entry">
+				{% for p in post%}
+				<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+					<figure>
+						<a href="{{ p.blog_details_url }}"><img src="{{ p.image.url }}" alt="Image" class="img-responsive"></a>
+					</figure>
+					<div class="fh5co-meta"><a href="{% url 'blog:single_category' name=p.category %}">{{ p.category }}</a> <a href="{{ p.author_post_url }}" class="article_author">{{ p.article_author.current_user.username }}</a></div>
+					<h2 class="fh5co-article-title"><a href="{{ p.blog_details_url }}">{{ p.title }}</a></h2>
+					<span class="fh5co-meta fh5co-date">{{ p.posted_on }}</span>
+				</article>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="container">
+			<div class="row text-center">
+				<div class="pagination">
+					<span class="step-links">
+						{% if post.has_previous %}
+							<a href="?page=1">&laquo; first</a>
+							<a href="?page={{ post.previous_page_number }}">previous</a>
+						{% endif %}
+
+						<span class="current">
+							Page {{ post.number }} of {{ post.paginator.num_pages }}.
+						</span>
+
+						{% if post.has_next %}
+							<a href="?page={{ post.next_page_number }}">next</a>
+							<a href="?page={{ post.paginator.num_pages }}">last &raquo;</a>
+						{% endif %}
+					</span>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+<!-- body js -->
+{% block js %}{% endblock %}
+
+
+

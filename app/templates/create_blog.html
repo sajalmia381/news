@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block author %}
+<div class="fh5co-bio">
+    <figure>
+        <img src="{{ user.image.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+    </figure>
+    <h3 class="heading">About Me</h3>
+    <h2>{{ user.current_user.get_full_name }}</h2>
+    <h4>{{ user.current_user.email }}</h4>
+    <p>{{ user.details }}</p>
+    <ul class="fh5co-social">
+        <li><a href="#"><i class="icon-twitter"></i></a></li>
+        <li><a href="#"><i class="icon-facebook"></i></a></li>
+        <li><a href="#"><i class="icon-instagram"></i></a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <!--<a href="#" class="btn btn-success pull-right">Create New Post</a>-->
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                       New Blog Post
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method="POST" enctype="multipart/form-data" class="base-form">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}{% endblock %}

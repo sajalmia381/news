@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New User{% endblock %}
+
+{% block author %}{% endblock %}
+
+{% block css %}
+<style>
+    button{
+    margin-top: 25px}
+</style>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <!--<a href="#" class="btn btn-success pull-right">Create New Post</a>-->
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                       Registration Form
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method="POST" enctype="multipart/form-data" class="base-form">
+                            {% csrf_token %}
+                            <div class="col-md-6">
+                                <label>Fisrt Name</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="col-md-6">
+                                <label>Last Name</label>
+                                {{ form.last_name }}
+                            </div>
+                            <div class="col-md-6">
+                                <label>Email</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="col-md-6">
+                                <label>Username</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password Repeat</label>
+                                {{ form.password2 }}
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}{% endblock %}

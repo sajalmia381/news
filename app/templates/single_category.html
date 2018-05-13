@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Single Category{% endblock %}
+
+{% block author %}{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row fh5co-post-entry">
+            {% for p in post%}
+            <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+                <figure>
+                    <a href="{{ p.blog_details_url }}"><img src="{{ p.image.url }}" alt="Image" class="img-responsive"></a>
+                </figure>
+                <div class="fh5co-meta"><a href="{% url 'blog:single_category' name=p.category %}">{{ p.category }}</a> <a href="{{ p.author_post_url }}" class="article_author">{{ p.article_author.current_user.username }}</a></div>
+                <h2 class="fh5co-article-title"><a href="{{ p.blog_details_url }}">{{ p.title }}</a></h2>
+                <span class="fh5co-meta fh5co-date">{{ p.posted_on }}</span>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}{% endblock %}
